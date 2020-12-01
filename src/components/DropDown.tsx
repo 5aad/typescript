@@ -38,12 +38,14 @@ export default function DropDown(props: { list: any; title: any; }) {
   return (
     <div className="dd-wrapper">
       <div className="dd-headers" onClick={toggleList}>
+        
         <div className="dd-header-title">{headerTitle}</div>
+       
         {listOpen ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
       </div>
       {listOpen && (
         <ul className="dd-list">
-          {list.map((item: { id: string | number ; key: any; value: React.ReactNode; }) => (
+          {list.map((item: { id: string | number ; key: any; value: React.ReactNode; options:any; }) => (
             <li
               className="dd-list-item"
               key={item.id}
@@ -51,14 +53,18 @@ export default function DropDown(props: { list: any; title: any; }) {
             >
               <div className="dd-header">
                 <div className="dd-header-titles">
-                  {item.value}
+                {item.options.length>0?(
                   <div>
+                    {item.value}
                     {nestlistOpen ? (
                       <ChevronUp size={24} />
                     ) : (
                       <ChevronDown size={24} />
                     )}
                   </div>
+                  ):<p onClick={()=>setHeadeTitle(item.value)}>{item.value}</p>}
+
+
                 </div>
 
                 {nestlistOpen && nestItem.id === item.id ? (
