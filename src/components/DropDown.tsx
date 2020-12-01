@@ -7,13 +7,15 @@ export default function DropDown(props: { list: any; title: any; }) {
   const [location, setLocation] = useState(props.list);
   const [listOpen, setListOpen] = useState(false);
   const [nestlistOpen, setnestListOpen] = useState(false);
-  const [nestItem, setNestItem] = useState(React.createRef());
+  const [nestItem, setNestItem] = useState({id:0,key:'',selected:false,label:'',value:'',options:[]});
   const [keyword, setkeyword] = useState("");
   const [headerTitle, setHeadeTitle] = useState(props.title);
 
   const toggleItem = (id: string | number , key: any) => {
     let tempp = list[id];
-    setNestItem(tempp);
+    
+    setNestItem({id:tempp.id,key:tempp.key,selected:tempp.selected,
+      label:tempp.label,value:tempp.value,options:tempp.options});
     setnestListOpen((prevState) => !prevState);
     setkeyword("");
     let temp = list[id];
